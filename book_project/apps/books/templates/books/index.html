@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book project</title>
+</head>
+<body>
+	<h3>List of Authors and Books</h3>
+	<ul>
+		{% for author in authors %}
+		<li>{{ author.name }}</li>
+			<ul>
+				{% for book in author.books.all %}
+					<li><em>{{ book.title }}</em></li>
+				{% endfor %}
+			</ul>
+		{% endfor %}
+	</ul>
+</body>
+</html>

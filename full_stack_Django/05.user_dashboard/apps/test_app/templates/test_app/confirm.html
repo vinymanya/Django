@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Confirmation Message</title>
+</head>
+<body>
+<div class="container">
+	<h2>Are you sure you want to delete this profile information?</h2>
+	<p>Full Name: {{user.first_name}} {{user.last_name}}</p>
+	<p>Email: {{user.email}}</p>
+	<p>Description: {{user.desc}}</p>
+	<br>
+	<a href="/success"><button>No</button></a>
+	<a href="/users/{{user.id}}/delete"><button>Yes! I want to delete this</button></a>
+</div>
+
+</body>
+</html>

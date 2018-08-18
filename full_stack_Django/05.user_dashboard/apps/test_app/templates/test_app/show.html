@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show User's Details</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+	<h1>User's Profile</h1>
+	<h3>ID: #{{user.id}}</h3>
+	<h3><strong>Full Name: </strong>{{user.first_name}} {{user.last_name}}</h3>
+	<h3><strong>Email: </strong>{{user.email}}</h3>
+	<h3><strong>Created_at: </strong>{{user.created_at}}</h3>
+	<h3><strong>Description: </strong>{{user.desc}}</h3>
+	<p><a href="/users/{{user.id}}/edit">Edit</a> | <a href="/users/{{user.id}}/confirm">Remove</a>| <a href="/dashboard">Go Back</a></p>
+	<!-- output all messages and comments here-->
+	{% for message in messages %}
+		<p>{{message.message}}</p>
+		{% for comment in message_id.comment.all %}
+			<div>
+				<p>{{comment.comment}}</p>
+			</div>
+		{% endfor %}
+		<form action="/comments/{{message.id}}" method="post">
+			{% csrf_token %}
+			<textarea name="comment"></textarea><br>
+			<input type="submit" class="btn btn-primary" value="Post a Comment">
+		</form>
+	{% endfor %}
+
+	<!--Messages and Comments forms -->
+	<form action="/messages/{{user.id}}" method="post">
+		{% csrf_token %}
+		<label>Leave a Message for {{user.first_name}}</label><br>
+		<textarea name="message_id"></textarea> <!--match the name of this field with name of foreignkey field in the model -->
+		<input type="submit" class="btn btn-primary" value="Post a Message">
+	</form>
+</div>
+
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

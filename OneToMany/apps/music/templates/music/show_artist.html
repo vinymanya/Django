@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show artist Page</title>
+</head>
+<body>
+
+<h3>Artist Name: {{artist.name}}</h3>
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Release_year</th>
+			<th>Label</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- Display all albums that belong to this artist -->
+		{% for album in artist.albums.all %}
+			<tr>
+				<td><a href="/albums/{{album.id}}">{{album.name}}</a></td>
+				<td>{{album.release_year}}</td>
+				<td>{{album.label}}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<a href="/"><button>Go Back>></button></a>
+
+</body>
+</html>

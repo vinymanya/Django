@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movies</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'actors/css/style.css' %}">
+</head>
+<body>
+	<h3>List of Movies</h3>
+	{% if movies %}
+		<ul>
+			{% for movie in movies %}
+				<li>{{ movie.title }} | <a href="/movies/{{ movie.id }}/delete">Delete</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h4>There are no movies yet!</h4>
+	{% endif %}
+
+	{{ movies }}
+	<hr>
+	<!-- Display error messages -->
+	{% if messages %}
+		{% for message in messages %}
+			<p class="{{ message.tags }}">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+
+	<form action="/movies/create_movie" method="post">
+		<fieldset>
+			<legend>Add Movie Title</legend>
+			{% csrf_token %}
+			<label for="title">
+				Title:<input type="text" name="title" id="title">
+			</label>
+			<input type="submit" value="Add Movie">
+		</fieldset>
+	</form>
+	<br>
+	<a href="/actors"><button>Go Back</button></a>
+</body>
+</html>

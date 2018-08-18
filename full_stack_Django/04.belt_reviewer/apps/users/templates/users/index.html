@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'users/css/style.css' %}">
+</head>
+<body>
+	<h1>Welcome!</h1>
+	{% if messages %}
+		{% for message in messages %}
+			<p class="{{ message.tags }}">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+
+	<form action="/users/register" method="post">
+		{% csrf_token %}
+		<fieldset>
+			<legend>Register</legend>
+			<p>
+				<label for="name">Name:</label>
+				<input type="text" name="name" id="name">
+			</p>
+			<p>
+				<label for="alias">Alias:</label>
+				<input type="text" name="alias" id="alias">
+			</p>
+			<p>
+				<label for="email">Email:</label>
+				<input type="email" name="email" id="email">
+			</p>
+			<p>
+				<label for="pw">Password:</label>
+				<input type="password" name="password" id="pw">
+			</p>
+			<p>
+				<label for="cpw">Confirm Paasword:</label>
+				<input type="password" name="confirm_password" id="cpw">
+			</p>
+			<input type="submit" value="Register">
+		</fieldset>
+	</form>
+	<a href="/users/login_form">Already registered?, please login!</a>
+</body>
+</html>

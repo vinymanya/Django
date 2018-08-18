@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update User</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'usersapp/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+	<h1>Edit Profile {{user.id}}</h1>
+	<h4>Last Updated: {{user.updated_at}}</h4>
+
+	<!-- again display validation messages-->
+	{% if messages %}
+	<div class="container">
+		{% for message in messages %}
+			<p class="message.tags">{{message}}</p>
+		{% endfor %}
+	</div>
+	{% endif %}
+	<div class="separator">
+		<form action="/users/{{user.id}}/update" method="POST">
+		    {% csrf_token %}
+		    <div class="form-group">
+		        <label for="first_name">First Name:</label>
+		        <input type="text" name="first_name" value="{{user.first_name}}">
+		    </div>
+		    <div class="form-group">
+		        <label for="last_name">Last Name:</label>
+		        <input type="text" name="last_name" value="{{user.last_name}}">
+		    </div>
+		    <div class="form-group">
+		        <label for="email">Email:</label>
+		        <input type="email" name="email" value="{{user.email}}">
+		    </div>
+		    <div class="form-group">
+		        <label for="desc">Description:</label>
+		        <textarea id="desc" name="desc">{{user.desc}}</textarea>
+		    </div>
+		    <input type="submit" class="btn btn-primary" value="Update">
+		</form>
+	</div>
+</div>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

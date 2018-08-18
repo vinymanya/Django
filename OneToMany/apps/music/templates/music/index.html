@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music App</title>
+</head>
+<body>
+	<h1>Welcome to the Music App!</h1>
+	<form action="/artists/create" method="post">
+		<h3>Add An Artist:</h3>
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="artist">Name</label>
+			<input type="text" name="artist" id="artist">
+		</div>
+		<input type="submit" value="Add Artist">
+	</form>
+	<hr>
+
+	<form action="/albums/create" method="post">
+		<h3>Add An Album:</h3>
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="album">Name</label>
+			<input type="text" name="album_name" id="album">
+		</div>
+		<div class="form-group">
+			<label for="release_year">Release_year</label>
+			<input type="date" name="release_year" id="release_year">
+		</div>
+		<div class="form-group">
+			<label for="label">Label</label>
+			<input type="text" name="label" id="label">
+		</div>
+		<select name="artist_id">
+			<option value="">Select Artist</option>
+			{% for artist in  artists%}
+				<option value="{{artist.id}}">{{artist.name}}</option>
+			{% endfor %}
+		</select>
+		<br>
+		<input type="submit" value="Add Album">
+	</form>
+
+	<hr>
+	<h3>List of Available Artists and their Albums so far</h3>
+	<ul>
+		{% for artist in artists %}
+			<a href="/artists/{{artist.id}}"><li>{{ artist.name }}</li></a>
+			<ul>
+			{% for album in artist.albums.all %}
+				<li>{{ album.name }}</li>
+			{% endfor %}
+			</ul>
+		{% endfor %}
+	</ul>
+</body>
+</html>

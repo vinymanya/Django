@@ -1,0 +1,41 @@
+#1. Dojo.objects.create(name=“CodingDojo”, city=“Mountain View”, state=“CA”)
+#2. Dojo.objects.all().delete()
+#3. Dojo.objects.create(name=“CodingDojo”, city=“Seattle”, state=“WA”)
+#4. Ninja.objects.create(dojo=Dojo.objects.first(), first_name=“Sarah”, last_name=“seshell”)
+#5. Ninja.objects.create(first_name=“John”, last_name=“Doe”, dojo=Dojo.objects.get(id=2))
+#6. Dojo.objects.create(dojo=Dojo.objects.get(id=3), first_name=“Philip”, last_name=“Johnson”)
+#7. Dojo.objects.first().ninjas.all()
+#8. Dojo.objects.last().ninjas.all()
+#9. In the models.py file just add desc= models.TextField()
+
+Then python manage.py makemigrations and python manage.py migrate
+Then specify the timezone.now()
+
+
+book_authors app
+
+#1. Book.objects.first().authors.all()
+#2. Author.objects.first().books.all()
+#3. Book.objects.create(name="C Sharp", desc="c sharp stuff")
+#4. Author.objects.create(first_name="Viny", last_name="Manya", email="vinymanya@gmail.com", notes="like writing", book=Book.objects.first())
+#5. b = Book.objects.get(id=5)
+	b.name = "C#"
+	b.save()
+
+#6. b = Author.objects.get(id=5)
+	b.first_name = "Ketul"
+	b.save()
+
+#7. Author.objects.create(first_name= Author.objects.get(id=1).first_name, book=Book.objects.first())
+
+
+7.	For the 3rd book, retrieve all the authors
+>>> Book.objects.get(id=5).authors.all()
+
+8.	For the 3rd book, remove the first author
+>>> b = Book.objects.get(id=3)
+>>> b.authors.first().delete()
+
+9.	For the 2nd book, add the 5th author as one of the authors
+10.	Find all the books that the 3rd author is part of
+11.	Find all the books that the 2nd author is part of

@@ -1,0 +1,16 @@
+Using the shell:
+
+#1. User.objects.all()
+#2. User.objects.last()
+#3. User.objects.create(first_name=“Viny”, last_name=“Manya”, email=“vinym@gmail.com”, age=26)
+#4. User.objects.all().first()
+#5. User.objects.all()
+#6. User.objects.order_by(“-first_name”)
+#7. b=User.objects.get(id=3)
+    b.last_name = “something else”
+    b.save()
+#8.b=User.objects.get(id=4)
+   b.delete()
+Or 
+
+User.objects.get(id=4).delete()

@@ -1,0 +1,36 @@
+div.container{
+	padding: 20px;
+}
+
+.error{
+	color: red;
+}
+
+table{
+	width: 85%;
+	border: 1px solid black;
+	margin-bottom: 25px;
+}
+
+thead{
+	background-color: lightblue;
+
+}
+ th, td{
+	text-align: center;
+}
+
+tbody{
+	text-align: center;
+}
+
+tbody > tr:nth-child(odd){
+	background-color: lightgrey;
+}
+th, td{
+	height: 10px;
+}
+
+p{
+	color: red;
+}

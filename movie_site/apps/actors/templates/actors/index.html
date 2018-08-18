@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index Page</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'actors/css/style.css' %}">
+</head>
+<body>
+	<h3>List of Actors</h3>
+	{% if actors %}
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Date of Birth</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for actor in actors %}
+					<tr>
+						<td>{{ actor.id }}</td>
+						<td>{{ actor.first_name }}</td>
+						<td>{{ actor.last_name }}</td>
+						<td>{{ actor.dob }}</td>
+						<td><a href="/actors/{{ actor.id }}/delete">Remove</a> | <a href="/actors/{{ actor.id }}">Show Details</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<h4>NO ACTOR ADDED SO FAR!</h4>
+	{% endif %}
+
+	<a href="/movies/title">Create movie</a>
+	<hr>
+
+	<!-- display error messages here -->
+	{% if messages %}
+		{% for message in messages %}
+			<p class="{{ message.tags }}">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+	
+	<form action="/actors/create" method="post">
+		<fieldset>
+			<legend>Add Actor</legend>
+			{% csrf_token %}
+			<p>
+				<label for="fn">First Name:</label>
+				<input type="text" name="first_name" id="fn">
+			</p>
+			<p>
+				<label for="ln">Last Name:</label>
+				<input type="text" name="last_name" id="ln">
+			</p>
+			<p>
+				<label for="dob">Date of Birth:</label>
+				<input type="date" name="dob" id="dob">
+			</p>
+			<input type="submit" value="Add Actor">
+		</fieldset>
+	</form>
+
+</body>
+</html>

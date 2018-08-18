@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Success Page</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'signup/style.css'%}">
+</head>
+<body>
+	<div class="container">
+		<a href="/logout">Logout</a>
+		<h1>Success | Welcome, <span>{{user.first_name}}</span></h1>
+		{% if messages %}
+		<div class="messages">
+			{% for message in messages %}
+				<h4>{{message}}</h4>
+			{% endfor %}	
+		</div>
+		{% endif %}
+	</div>
+</body>
+</html>

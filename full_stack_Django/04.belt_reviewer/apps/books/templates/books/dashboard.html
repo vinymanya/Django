@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/style.css' %}">
+</head>
+<body>
+	{% if messages %}
+		{% for message in messages %}
+			<p class="{{ message.tags }}">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+	<a href="/books/add">Add Book and Review</a>
+    <a href="/logout">Logout</a>
+	<hr>
+	<h2>Welcome, {{ user.name }}!</h2>
+	<h3>Recent Book Review:</h3>
+	{% for review in reviews %}
+		{% if review.book.title not in recent_books %}
+		<a href="/books/{{ review.book.id }}">{{ review.book.title }}</a>
+		<p>Rating: {{ review.rating }}</p>
+		<p>
+			<a href="/users/{{ review.user.id }}">{{ review.user.alias }}</a>
+			says: {{ review.content }}
+		</p>
+		<h5>Posted on {{ review.created_at }}</h5>
+		{% endif %}
+	{% endfor %}
+
+
+	<div class="other">
+        <h2>Other Books with Reviews:</h2>
+        <ul>
+        {% for book in books %}
+        	{% if book in other_books %}
+            <li><a href="/books/{{ book.id }}">{{ book.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

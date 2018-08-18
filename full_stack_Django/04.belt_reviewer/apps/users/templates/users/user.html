@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display user</title>
+</head>
+<body>
+	<h3>User Alias: {{ user.alias }}</h3>
+	<h5>Name: {{ user.name }}</h5>
+	<h5>Email: {{ user.email }}</h5>
+	<h5>Total Reviews: {{ count }}</h5>
+
+	<h5>Posted Reviews on the following books:</h5>
+	<ul>
+	{% for review in reviews %}
+		<li><a href="/books/{{ review.book.id }}">{{ review.book.title }}</a></li>		
+	{% endfor %}
+	</ul>
+
+	<a href="/books">Go Back</a>
+</body>
+</html>

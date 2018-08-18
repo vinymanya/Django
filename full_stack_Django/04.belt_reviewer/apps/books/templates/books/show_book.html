@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book details</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/style.css' %}">
+</head>
+<body>
+	<a href="/books">Home</a>
+	<a href="/logout">Logout</a>
+	<hr>
+
+	<h3>{{ book.title }}</h3>
+	<p>Author: {{ book.author }}</p>
+	<h3>Reviews: </h3>
+	<hr>
+	{% for review in reviews %}
+		<p>Rating: {{ review.rating }}</p>
+		<a href="/users/{{review.user.id}}">{{ review.user.alias }}</a> 
+		<span> says: {{ review.content }}</span>
+		<p>Posted on {{ review.created_at }}</p>
+		{% if review.user.id == request.session.user_id %}
+			<a href="/books/{{ book.id }}/delete/{{ review.id }}">Delete this review</a>
+		{% endif %}
+		<hr>
+	{% endfor %}
+
+	<!-- display error messages -->
+	{% if messages %}
+		{% for message in messages %}
+			<p class="{{ message.tags }}">{{ message }}</p>
+		{% endfor %}
+	{% endif %}
+	<form action="/books/{{ book.id }}/add_review/{{ request.session.user_id }}" method="post">
+    	{% csrf_token %}
+        <textarea name="review" cols="40" rows="5" placeholder="Add a Review"></textarea><br><br>
+        <label for="rating">Rating: </label>
+        <select name="rating">
+        	<option value="">Seletect Rating</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit Review">
+    </form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show {{ actor.first_name }}'s Details</title>
+</head>
+<body>
+	<h3>Actor's Details</h3>
+	<p>First Name: {{ actor.first_name }}</p>
+	<p>Last Name: {{ actor.last_name }}</p>
+	<p>Date of Birth: {{ actor.dob }}</p>
+
+	<!-- List all movies by this actor -->
+	{% if actor.movies.all %}
+		<h3>List of Featured Movie(s):</h3>
+		<ul>
+			{% for movie in actor.movies.all %}
+				<li>{{ movie.title }} | <a href="/actors/{{ actor.id }}/remove_from_movie/{{ movie.id }}">Remove</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<h4>Not Featured in any movie yet!</h4>
+	{% endif %}
+
+	<!-- Form to select a movie for this actor -->
+	<!-- add actor.id in action to know which actor the movie belongs to -->
+	<form action="/actors/add_to_movie/{{ actor.id }}" method="post">
+		{% csrf_token %}
+		<select name="movie_id">
+			{% for movie in movies %}
+				{% if movie.id not in movie_ids %}
+					<option value="{{ movie.id }}">{{ movie.title }}</option>
+				{% endif %}
+			{% endfor %}
+		</select>
+		<input type="submit" value="Add Movie">
+	</form>
+	<br>
+	<a href="/actors"><button>Go Back</button></a>
+</body>
+</html>
